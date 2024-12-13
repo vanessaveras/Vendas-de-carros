@@ -1,6 +1,8 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import os
+from flask import Flask
 
 # Lendo os dados
 car_data = pd.read_csv(
@@ -33,3 +35,15 @@ if st.button('Criar gráfico de dispersão'):
 
 # Instruções para adicionar novas funcionalidades
 st.write("Selecione as opções acima para visualizar os dados e gráficos.")
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    return 'Bem-vindo!'
+
+
+if __name__ == '__main__':
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
